@@ -37,7 +37,9 @@ Constraints:
 
 */
 
-//Attempt 1 Brute Force
+// Attempt 1 Brute Force 
+// This solution contains nests for loops and is not optimal
+// O(n^2) time complexity
 
 class Solution {
     public String minRemoveToMakeValid(String s) {
@@ -61,5 +63,41 @@ class Solution {
             }
         }
         return newString;
+    }
+}
+
+//Attempt 2 Using a stack to track parentheses
+// This removes the nested for loops but contains two for loops
+// O(2n) time complexity
+
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        Set<Integer> toRemove = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            
+            if (c == '(') {
+                stack.push(i);
+            } else if (c == ')') {
+                if (!stack.isEmpty()) {
+                    stack.pop();  // Matched with an opening parenthesis
+                } else {
+                    toRemove.add(i);  // Unmatched closing parenthesis
+                }
+            }
+        }
+        
+        // Remaining items in stack are unmatched opening parentheses
+        toRemove.addAll(stack);
+        
+        // Build result string excluding indices marked as to remove
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (!toRemove.contains(i)) {
+                result.append(s.charAt(i));
+            }
+        }       
+        return result.toString();
     }
 }
