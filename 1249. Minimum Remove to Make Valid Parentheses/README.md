@@ -1,6 +1,6 @@
-#LeetCode #1249. Minimum Remove to Make Valid Parentheses
+# LeetCode - 1249. Minimum Remove to Make Valid Parentheses
 
-##Problem Description:
+## Problem Description:
 
 Given a string s of '(' , ')' and lowercase English characters.
 
